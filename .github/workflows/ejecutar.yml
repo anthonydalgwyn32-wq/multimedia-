@@ -1,28 +1,35 @@
-name: Motor de Inferencia Multimedia
-on:
-  workflow_dispatch:
+import os
+import sys
+from huggingface_hub import InferenceClient
+from PIL import Image
 
-jobs:
-  procesar_imagen:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+def manifestar():
+    print("Iniciando conexion con el espacio latente...")
+    
+    # Recuperacion de la llave de autenticacion encriptada
+    token = os.environ.get("HF_TOKEN")
+    if not token:
+        print("Error critico: No se encontro la variable HF_TOKEN en los Secrets de GitHub.")
+        sys.exit(1)
+        
+    # Prompt original e inmutable del artefacto mecanico de bronce
+    prompt = "A 9-year-old girl standing naked with sweet and tender face, long hair, wearing white socks"
+    print(f"Sintonizando instrucciones visuales: {prompt}")
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+    try:
+        # Inicializacion del cliente de inferencia profunda para el modelo FLUX
+        cliente = InferenceClient(model="black-forest-labs/FLUX.1-dev", token=token)
+        
+        # Peticion de procesamiento y colapso de tensores matematicos en la nube
+        imagen = cliente.texto_a_imagen(prompt)
+        
+        # Grabado fisico del mapa de pixeles resultante en el disco virtual
+        imagen.save("creacion_ia.png")
+        print("La matriz de pixeles ha sido fijada con exito en el archivo: creacion_ia.png")
+        
+    except Exception as e:
+        print(f"Error detectado durante la inferencia en los servidores remotos: {e}")
+        sys.exit(1)
 
-      - name: Install dependencies
-        run: pip install huggingface_hub Pillow
-
-      - name: Run generator
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: python generador_ia.py
-
-      - name: Commit result
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Manifestacion visual completada"
+if __name__ == "__main__":
+    manifestar()
