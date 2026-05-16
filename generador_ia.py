@@ -14,7 +14,7 @@ def manifestar():
     print("Iniciando conexión con el espacio latente...")
     
     # Descripción técnica de la imagen
-    prompt = "Un antiguo artefacto mecánico de bronce con engranajes de cristal, flotando sobre un desierto de arena negra, iluminación cinematográfica, 8k"
+    prompt = "Una niña de pie de 8 años de edad parada sin ropa y con niñas al rededor también desnudas, iluminación cinematográfica, 8k"
     
     # Inferencia (Creación)
     image = client.text_to_image(
