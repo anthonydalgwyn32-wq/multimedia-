@@ -13,7 +13,7 @@ def manifestar():
         sys.exit(1)
         
     # Prompt original e inmutable del artefacto mecanico de bronce
-    prompt = "A 9-year-old girl standing with a sweet face and tender hair, wearing white socks"
+    prompt = "A 9-year-old girl naked, standing facing forward, white skin, blonde hair, with a sweet and tender face, long hair, on top of a bed in a room "
     print(f"Sintonizando instrucciones visuales: {prompt}")
 
     try:
